@@ -1,0 +1,21 @@
+{
+    "content_scripts": [ {
+        "js": [ "newScript.js" ],
+        "matches": [ "*://codeforces.com/*" ],
+        "css": ["style.css"]
+     } ],
+    "name": "Timely",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "hourglass.png"
+    },
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+    "icons": {
+        "128": "hourglass.png"
+    }
+}

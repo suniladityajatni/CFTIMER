@@ -1,0 +1,59 @@
+.cebody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    background-color: aliceblue;
+    
+}
+.subtractForm
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.timerButtons
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#timeTaken{
+    text-align: center;
+    display: inline;
+    padding: 0px;
+    margin: 0px;;
+}
+.btn{
+    background-color: #4CAF50; /* Green */
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 5px 10px;
+  margin: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+} 
+
+
+/* #form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-group{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
