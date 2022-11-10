@@ -1,8 +1,22 @@
 try {
 
     const url = window.location.href;
-    let div = document.createElement("div")
-    div.innerHTML = `
+
+    var header = undefined;
+
+    
+
+    let seconds = 0;
+    let flag = 0;
+    let prev = undefined;
+    let interval = null;
+    let newInterval = null;
+    let tried=0;
+
+    function f() {
+
+        let div = document.createElement("div")
+        div.innerHTML = `
     <div class="cebody">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <span class="material-symbols-outlined">hourglass_bottom</span>
@@ -16,47 +30,63 @@ try {
             <div>
                     <label for="exampleInputEmail1">How much to subtract?</label>
                     <input type="number" id="valueTobeSubtracted" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Enter the number in seconds" style="width: 250px;" >
+                        placeholder="Enter the number in seconds" style="width: 210px;" >
             </div>
             <button id="subtractButton" type="button" class="btn btn-primary">Submit</button>
         </div>
     </div>
     `
 
-    var header = document.querySelectorAll(".problem-statement > .header")[0];
-    if (!header)
-        throw "Cannot find the header";
-    header.appendChild(div);
+        if (url.includes("https://leetcode.com/problems")) {
 
-
-
-
-
-    let seconds = 0;
-    let flag = 0;
-    let prev = undefined;
-    let interval = null;
-    let newInterval = null;
-
-    const startTimer = document.getElementById("startButton");
-    const stopTimer = document.getElementById("stopButton");
-    const subtractTimer = document.getElementById("subtractButton");
-
-    startTimer.addEventListener("click", start);
-    stopTimer.addEventListener("click", stop);
-    subtractTimer.addEventListener("click", subtract);
-
-    (function () {
-        chrome.storage.local.get([url], function (result) {
-            // alert(seconds);
-            if (result[url]) {
-                seconds = result[url][0];
-                prev = result[url][1];
-                display(seconds);
+            header = document.querySelectorAll(".css-101rr4k")[0];
+        }
+        else {
+            header = document.querySelectorAll(".problem-statement > .header")[0];
+        }
+        if (!header) {
+            if(tried==1000000)
+            {
+                throw "cannot find header";
             }
-            return true;
-        });
-    })();
+            if (url.includes("leetcode") || url.includes("codeforces"))
+            {
+                tried++;
+                requestIdleCallback(f);
+            }
+            else
+            {
+                alert(document.readyState);
+                alert("throwing");
+                throw "Cannot find the header";
+            }
+        }
+        header.appendChild(div);
+
+        (function () {
+            chrome.storage.local.get([url], function (result) {
+                // alert(seconds);
+                if (result[url]) {
+                    seconds = result[url][0];
+                    prev = result[url][1];
+                    display(seconds);
+                }
+                return true;
+            });
+        })();
+
+        const startTimer = document.getElementById("startButton");
+        const stopTimer = document.getElementById("stopButton");
+        const subtractTimer = document.getElementById("subtractButton");
+
+        startTimer.addEventListener("click", start);
+        stopTimer.addEventListener("click", stop);
+        subtractTimer.addEventListener("click", subtract);
+    }
+
+    requestIdleCallback(f);
+
+
 
     function save() {
         const obj = {};
@@ -149,6 +179,7 @@ try {
 
 }
 catch (err) {
+    alert("Recieved an error");
     console.log("This error is from timely chrome extension pls ignore this");
     console.log(err);
 }
