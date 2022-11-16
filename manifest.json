@@ -1,7 +1,7 @@
 {
     "content_scripts": [ {
         "js": [ "newScript.js" ],
-        "matches": [ "*://codeforces.com/*","*://leetcode.com/*" ],
+        "matches": [ "*://codeforces.com/*" ],
         "css": ["style.css"]
      } ],
     "name": "Timely",
